@@ -1,3 +1,7 @@
+import time
+
+
+
 def concat(op1, op2):
     if (op2<10):
         op2_digit = 1
@@ -87,6 +91,8 @@ fh = open("source.txt", 'r')
 part1_cnt = 0
 part2_cnt = 0
 
+start_time = time.time()
+
 while (line := fh.readline()):
     line_stripped = line.strip()
     line_splitted = line_stripped.split(':')
@@ -98,12 +104,33 @@ while (line := fh.readline()):
     else:
         pass
 
+part1_time = time.time()
+
+print("part 1: " + str(part1_cnt))
+print("elapsed time: " + str(part1_time-start_time))
+
+start2_time = time.time()
+
+fh.close()
+
+fh = open("source.txt",'r')
+
+while (line := fh.readline()):
+    line_stripped = line.strip()
+    line_splitted = line_stripped.split(':')
+    result = int(line_splitted[0])
+    line_operands = line_splitted[1].split()
+    int_operands = [int(el) for el in line_operands]
     if (part2_check_result(int_operands, result)):
         part2_cnt+=result
     else:
         pass
 
-    
 
-print("part 1: " + str(part1_cnt))
+part2_time = time.time()
+
 print("part 2: " + str(part2_cnt))
+print("elapsed time: "+ str(part2_time-start2_time))
+
+
+fh.close()
